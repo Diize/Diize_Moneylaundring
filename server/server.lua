@@ -1,12 +1,11 @@
 ESX = nil
-stressyo = true
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 RegisterNetEvent('checkcash_seventie')
 AddEventHandler('checkcash_seventie', function()
 	local _source = source
-	local xPlayer = ESX.GetPlayerFromId(_source) 
+	local xPlayer = ESX.GetPlayerFromId(_source)
 	local myBlackMoney = xPlayer.getInventoryItem(Config.BlackMoney).count
 	local washpercentage_undone = myBlackMoney * 0.70
 	local washpercentage = round(washpercentage_undone)
@@ -28,7 +27,7 @@ end)
 RegisterNetEvent('checkcash_fifty')
 AddEventHandler('checkcash_fifty', function()
 	local _source = source
-	local xPlayer = ESX.GetPlayerFromId(_source) 
+	local xPlayer = ESX.GetPlayerFromId(_source)
 	local myBlackMoney = xPlayer.getInventoryItem(Config.BlackMoney).count
 	local washpercentage_undone = myBlackMoney * 0.50
 	local washpercentage = round(washpercentage_undone)
@@ -50,7 +49,7 @@ end)
 RegisterNetEvent('checkcash_hundred')
 AddEventHandler('checkcash_hundred', function()
 	local _source = source
-	local xPlayer = ESX.GetPlayerFromId(_source) 
+	local xPlayer = ESX.GetPlayerFromId(_source)
 	local myBlackMoney = xPlayer.getInventoryItem(Config.BlackMoney).count
 	local washpercentage_undone = myBlackMoney * 1
 	local washpercentage = round(washpercentage_undone)
@@ -64,7 +63,7 @@ AddEventHandler('checkcash_hundred', function()
 		-- xPlayer.addInventoryItem('cash', finalreturn)
 		xPlayer.addMoney(finalreturn)
 		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = Config.YouGot ..finalreturn.. Config.BackFrom ..washpercentage..Config.DirtyCash, style = { ['background-color'] = '#3d66b4', ['color'] = '#ffffff' } })
-		
+
 
 	else
 		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = Config.NotEnoughDirtyCash, style = { ['background-color'] = '3d66b4', ['color'] = '#ffffff' } })

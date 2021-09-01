@@ -12,7 +12,7 @@ local Keys = {
 	["HOME"] = 213, ["PAGEUP"] = 10, ["PAGEDOWN"] = 11, ["DELETE"] = 178,
 	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
   }
-  
+
 
 
 RegisterNetEvent('esx:playerLoaded')
@@ -31,17 +31,17 @@ function Draw3DText(x, y, z, text, scale)
 
     local onScreen, _x, _y = World3dToScreen2d(x, y, z)
     local pX, pY, pZ = table.unpack(GetGameplayCamCoords())
- 
+
     SetTextScale(0.0, 0.35)
     SetTextFont(4)
     SetTextProportional(1)
     SetTextEntry("STRING")
     SetTextCentre(1)
     SetTextColour(255, 255, 255, 215)
- 
+
     AddTextComponentString(text)
     DrawText(_x, _y)
- 
+
     local factor = (string.len(text)) / 230
     -- DrawRect(_x, _y + 0.0250, 0.095 + factor, 0.06, 41, 11, 41, 100)
 end
@@ -56,7 +56,7 @@ Citizen.CreateThread(function()
     if GetDistanceBetweenCoords(coords, Config.Location, true) < 0.5 then
     if ( IsControlJustPressed( 1, Config.MenuKey ) ) then
     TriggerEvent('triggermenu')
-    
+
 end
 end
 end
@@ -67,6 +67,14 @@ RegisterNetEvent('triggermenu', function(data)
     TriggerEvent('nh-context:sendMenu', {
         {
             id = 1,
+            header = "Wash 25%",
+            txt = "",
+            params = {
+                event = "triggerserverside_twentyfive"
+            }
+        },
+        {
+            id = 11,
             header = "Wash 50%",
             txt = "",
             params = {
@@ -107,6 +115,10 @@ RegisterNetEvent('triggerserverside_hundred')
 AddEventHandler('triggerserverside_hundred', function()
     TriggerServerEvent('checkcash_hundred')
 end)
+RegisterNetEvent('triggerserverside_twentyfive')
+AddEventHandler('triggerserverside_twentyfive', function()
+    TriggerServerEvent('checkcash_twentyfive')
+end)
 
 
 
@@ -127,24 +139,5 @@ AddEventHandler('animationxd', function()
         }})
     Citizen.Wait(Config.ProgressbarTime * 1000)
     ClearPedTasks(PlayerPedId())
-		
+
 end)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

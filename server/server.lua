@@ -49,6 +49,29 @@ AddEventHandler('checkcash_fifty', function()
 end
 end)
 
+RegisterNetEvent('checkcash_twentyfive')
+AddEventHandler('checkcash_twentyfive', function()
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+	local myBlackMoney = xPlayer.getAccount('black_money').money
+	-- local myBlackMoney = xPlayer.getInventoryItem(Config.BlackMoney).count
+	local washpercentage_undone = myBlackMoney * 0.25
+	local washpercentage = round(washpercentage_undone)
+	local cleancash = washpercentage * Config.Rate
+	local finalreturn = round(cleancash)
+
+	if myBlackMoney >= Config.MinimumBlackMoney then
+		TriggerClientEvent('animationxd', _source)
+		Wait(Config.ProgressbarTime * 1000)
+		xPlayer.removeAccountMoney('black_money', washpercentage)
+		xPlayer.addMoney(finalreturn)
+		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = Config.YouGot ..finalreturn.. Config.BackFrom ..washpercentage..Config.DirtyCash, style = { ['background-color'] = '#3d66b4', ['color'] = '#ffffff' } })
+
+	else
+		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = Config.NotEnoughDirtyCash, style = { ['background-color'] = '#3d66b4', ['color'] = '#ffffff' } })
+end
+end)
+
 RegisterNetEvent('checkcash_hundred')
 AddEventHandler('checkcash_hundred', function()
 	local _source = source

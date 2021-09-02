@@ -63,7 +63,7 @@ Citizen.CreateThread(function()
                 end
             end
         end
-        if #(threadDist - Config.Location) > 50 then
+        if #(coords - Config.Location) > 50 then
            Citizen.Wait(threadDist * 10)
         end
     end

@@ -124,7 +124,7 @@ end)
 
 RegisterNetEvent('animationxd')
 AddEventHandler('animationxd', function()
-    TaskStartScenarioInPlace(PlayerPedId(), "PROP_HUMAN_BUM_SHOPPING_CART", 0, true)
+    TaskStartScenarioInPlace(PlayerPedId(), "PROP_HUMAN_BUM_BIN", 0, true)
     TriggerEvent("mythic_progbar:client:progress", {
         name = "unique_action_name",
         duration = Config.ProgressbarTime * 1000,

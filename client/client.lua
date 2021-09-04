@@ -48,20 +48,27 @@ end
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(5)
-  local coords = GetEntityCoords(GetPlayerPed(-1))
-  local distance = GetDistanceBetweenCoords(coords, Config.Location, true)
-  if distance < 5 then
-    Draw3DText(Config.Location.x, Config.Location.y, Config.Location.z, "~w~[~g~E~w~] Wash Money", 0.80)
-    if GetDistanceBetweenCoords(coords, Config.Location, true) < 0.5 then
-    if ( IsControlJustPressed( 1, Config.MenuKey ) ) then
-    TriggerEvent('triggermenu')
-
-end
-end
-end
-end
+        Citizen.Wait(0)
+        local coords = GetEntityCoords(PlayerPedId())
+        local distance = #(coords - Config.Location)
+        local threadDist = 1000
+        if distance < threadDist then
+            threadDist = distance
+        end
+        if distance < 5 then
+            Draw3DText(Config.Location.x, Config.Location.y, Config.Location.z, "~w~[~g~E~w~] Wash Money", 0.80)
+            if #(coords - Config.Location) < 0.5 then
+                if (IsControlJustPressed(1, Config.MenuKey)) then
+                    TriggerEvent("triggermenu")
+                end
+            end
+        end
+        if #(coords - Config.Location) > 50 then
+           Citizen.Wait(threadDist * 10)
+        end
+    end
 end)
+
 
 RegisterNetEvent('triggermenu', function(data)
     TriggerEvent('nh-context:sendMenu', {
